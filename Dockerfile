@@ -23,6 +23,7 @@ ENV PATH="${PATH}:${HOME}/bin:${ANT_HOME}/bin"
 ##Load packages
 RUN apt update
 
+
 ##Install GIT
 RUN apt install git -y
 
@@ -40,7 +41,10 @@ WORKDIR /home
 
 COPY . . 
 
+RUN ant bootstrap
+RUN ant resolve
+RUN ant build
 
-CMD ["./oltpbenchmark", "-b", "tpcc", "-c", "config/sample_tpcc_config.xml", "--execute=true", "-s", "5", "-o", "outputfile"]
+CMD ["./oltpbenchmark", "-b", "tpcc", "-c", "config/db2_tpcc_config.xml", "--execute=true", "-s", "5", "-o", "outputfile"]
 
 
